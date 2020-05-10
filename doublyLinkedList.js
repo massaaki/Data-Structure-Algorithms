@@ -1,15 +1,17 @@
-function LinkedList() {
+function DoublyLinkedList() {
   /**
    * Node with element and pointer
    */
   let Node = function(element) {
     this.element = element;
     this.next = null;
+    this.prev = null;
   }
 
 
   let length = 0;
   let head = null;
+  let tail = null;
 
   /**
    * Method Append
@@ -21,6 +23,7 @@ function LinkedList() {
 
     if(head === null) {
       head = node;
+      tail = node;
     } else {
       current = head;
 
@@ -29,6 +32,7 @@ function LinkedList() {
       }
 
       current.next = node;
+      tail = node;
     }
     length++;
   }
@@ -38,29 +42,41 @@ function LinkedList() {
    * Add some node in specific position
    */
   this.insert = function (position, element) {
-    if(position >= 0 && position <= length) {
+    if( position >= 0 && position <= length ) {
       let node = new Node(element);
       let current = head;
       let previous;
       let index = 0;
 
-      if(position === 0) {
-        node.next = current;
-        head = node;
+      if ( position === 0 ) {
+        if ( !head ) {
+          head = node;
+          tail = node;
+        } else {
+          node.next = current;
+          current.prev = node;
+          head = node;
+        }
+      } else if( position === length ) {
+        current = tail;
+        current.next = node;
+        node.prev = current;
+        tail = node;
       } else {
-        while(index++ < position) {
+        while( index++ < position ) {
           previous = current;
           current = current.next;
         }
         node.next = current;
         previous.next = node;
+        current.prev = node;
+        node.prev = previous;
       }
       length++;
       return true;
     } else {
       return false;
     }
-
   }
 
   /**
@@ -68,23 +84,33 @@ function LinkedList() {
    * Remove some element in specific position
    */
   this.removeAt = function(position) {
-    if(position > -1 && position < length) {
+    if( position >= 0 && position < length) {
       let current = head;
       let previous;
       let index = 0;
 
-      if(position === 0) {
+      if( position === 0 ) {
         head = current.next;
+
+        if( length === 1 ) {
+          tail = null; 
+        } else {
+          head.prev = null;
+        }
+      } else if( position === length-1 ) {
+        current = tail;
+        tail = current.prev;
+        tail.next = null;
       } else {
         while(index++ < position) {
           previous = current;
           current = current.next;
         }
         previous.next = current.next;
+        current.next.prev = previous;
       }
       length--;
       return current.element;
-
     } else {
       return null;
     }
@@ -100,7 +126,7 @@ function LinkedList() {
   }
 
   /**
-   * Function: indexOf
+   * FUnction: indexOf
    * Returns specific element value position
    */
   this.indexOf = function(element) {
@@ -170,22 +196,23 @@ function LinkedList() {
 
 }
 
+
+
 /**
  * Example usage
  */
+var dll = new DoublyLinkedList();
+dll.append('Test 01');
+dll.append('Test 02');
+dll.append('Test 03');
+dll.insert(0, 'New 01')
+dll.insert(3, 'New 02')
+dll.insert(4, 'New 03')
+dll.print();
 
-let ll = new LinkedList();
-  ll.append('Test 01');
-  ll.append('Test 02');
-  ll.append('Test 03');
-
-ll.print();
-// ll.removeAt(1);
-// ll.print();
-
-ll.insert(2, "Test 04");
-ll.print();
-
-console.log(ll.indexOf("Test 04"));
-console.log(ll.remove('Test 01'));
-ll.print();
+dll.removeAt(0);
+dll.print();
+dll.removeAt(4);
+dll.print();
+dll.removeAt(2);
+dll.print();
