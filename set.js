@@ -96,6 +96,22 @@ function Set() {
     return unionSet;
   }
 
+  /**
+   * Function: Insersection
+   */
+  this.intersection = function(otherSet) {
+    let intersectionSet = new Set();
+    let values = this.values();
+
+    for(let i = 0 ; i < values.length ; i++) {
+      if(otherSet.has(values[i])){
+        intersectionSet.add(values[i]);
+      }
+    }
+    return intersectionSet;
+
+  }
+
 }
 
 
@@ -129,17 +145,40 @@ function Set() {
  * Union example
  */
 
-var setA = new Set();
+// let setA = new Set();
+// setA.add(1);
+// setA.add(2);
+// setA.add(3);
+
+// let setB = new Set();
+// setB.add(3);
+// setB.add(4);
+// setB.add(5);
+// setB.add(6);
+
+
+// let unionAB = setA.union(setB);
+// console.log(unionAB.values());
+
+
+
+
+/**
+ * Intersection example
+ */
+
+let setA = new Set();
 setA.add(1);
 setA.add(2);
 setA.add(3);
+setA.add(5);
 
-var setB = new Set();
+let setB = new Set();
+setB.add(2);
 setB.add(3);
 setB.add(4);
 setB.add(5);
 setB.add(6);
 
-
-var unionAB = setA.union(setB);
-console.log(unionAB.values());
+let intersectionAB = setA.intersection(setB);
+console.log(intersectionAB.values());
