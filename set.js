@@ -109,7 +109,21 @@ function Set() {
       }
     }
     return intersectionSet;
+  }
 
+  /**
+   * Function: Difference
+   */
+  this.difference = function(otherSet) {
+    let differenceSet = new Set();
+    values = this.values();
+
+    for( let i = 0 ; i < values.length ; i++) {
+      if(!otherSet.has(values[i])) {
+        differenceSet.add(values[i]);
+      }
+    }
+    return differenceSet;
   }
 
 }
@@ -167,11 +181,34 @@ function Set() {
  * Intersection example
  */
 
+// let setA = new Set();
+// setA.add(1);
+// setA.add(2);
+// setA.add(3);
+// setA.add(5);
+
+// let setB = new Set();
+// setB.add(2);
+// setB.add(3);
+// setB.add(4);
+// setB.add(5);
+// setB.add(6);
+
+// let intersectionAB = setA.intersection(setB);
+// console.log(intersectionAB.values());
+
+
+/**
+ * Differnece example
+ */
+
 let setA = new Set();
 setA.add(1);
 setA.add(2);
 setA.add(3);
 setA.add(5);
+setA.add(7);
+setA.add(9);
 
 let setB = new Set();
 setB.add(2);
@@ -180,5 +217,5 @@ setB.add(4);
 setB.add(5);
 setB.add(6);
 
-let intersectionAB = setA.intersection(setB);
+let intersectionAB = setA.difference(setB);
 console.log(intersectionAB.values());
