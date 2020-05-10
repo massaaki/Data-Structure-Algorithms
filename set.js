@@ -126,6 +126,24 @@ function Set() {
     return differenceSet;
   }
 
+  /**
+   * Function: Subset
+   */
+  this.subset = function(otherSet){
+    if(this.size() > otherSet.size()) {
+      return false;
+    } else {
+      let values = this.values;
+      
+      for( let i = 0 ; i < values.length ; i++ ) {
+        if( !otherSet.has(values[i]) ) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+
 }
 
 
@@ -198,24 +216,52 @@ function Set() {
 // console.log(intersectionAB.values());
 
 
+
+
+
 /**
  * Differnece example
  */
 
-let setA = new Set();
-setA.add(1);
-setA.add(2);
-setA.add(3);
-setA.add(5);
-setA.add(7);
-setA.add(9);
+// let setA = new Set();
+// setA.add(1);
+// setA.add(2);
+// setA.add(3);
+// setA.add(5);
+// setA.add(7);
+// setA.add(9);
 
-let setB = new Set();
-setB.add(2);
-setB.add(3);
-setB.add(4);
-setB.add(5);
-setB.add(6);
+// let setB = new Set();
+// setB.add(2);
+// setB.add(3);
+// setB.add(4);
+// setB.add(5);
+// setB.add(6);
 
-let intersectionAB = setA.difference(setB);
-console.log(intersectionAB.values());
+// let intersectionAB = setA.difference(setB);
+// console.log(intersectionAB.values());
+
+
+
+
+
+/**
+ * Subset example
+ */
+
+// let setA = new Set();
+// setA.add(1);
+// setA.add(2);
+
+// let setB = new Set();
+// setB.add(1);
+// setB.add(2);
+// setB.add(3);
+
+// let setC = new Set();
+// setB.add(2);
+// setB.add(3);
+// setB.add(4);
+
+// console.log(setA.subset(setB)); //verify if setA is subset of B - A contains in B : TRUE
+// console.log(setA.subset(setC)); //verify if setA is subset of B - A contains in C : FALSE
