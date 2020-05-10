@@ -75,6 +75,13 @@ function LinkedList() {
 
       if(position === 0) {
         head = current.next;
+
+        if(length === 1) {
+          tail = null;
+        } else {
+          head.prev = null;
+        }
+
       } else {
         while(index++ < position) {
           previous = current;
