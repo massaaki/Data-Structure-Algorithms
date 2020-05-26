@@ -86,27 +86,81 @@ function Dictionary() {
 
 }
 
+function HashTable() {
+  let table = [];
+
+  /**
+   * Function: Put
+   * Insert element
+   */
+  this.put = function(key, value) {
+    let position = loseloseHashCode(key);
+    console.log(position + ' ' + key);
+    table[position] = value;
+  }
+
+  /**
+   * Function: Remove
+   * Remove element
+   */
+  this.remove = function(key) {
+    table[loseloseHashCode(key)] = undefined;
+  }
+
+  /**
+   * Function: Get
+   * Retrieve a value
+   */
+  this.get = function(key) {
+    return table[loseloseHashCode(key)];
+
+  }
+
+  /**
+   * Returns Hash
+   */
+  let loseloseHashCode = function(key) {
+    let hash = 0;
+
+    for(let i = 0; i < key.length ; i++) {
+      hash += key.charCodeAt(i);
+    }
+    return hash % 37;
+  }
+
+}
+
+var hash = new HashTable();
+hash.put('helloWorld', 'helloworldValue');
+hash.put('helloWorld2', 'helloworldValue2');
+hash.put('helloWorld3', 'helloworldValue3');
 
 
-var dic = new Dictionary();
-dic.set('key01', 'value01');
-dic.set('key02', 'value02');
-dic.set('key03', 'value03');
-dic.set('key04', 'value04');
-
-console.log(dic.getItems());
-
-dic.delete('key02')
-
-console.log(dic.getItems());
-
-
-var obj = {
-  'key04' : 'value04',
-  'key05' : 'value05',
-  'key06' : 'value06',
-};
+console.log(hash.get('helloWorld'));
+hash.remove('helloWorld');
+console.log(hash.get('helloWorld'));
 
 
 
-console.log(obj['key05']);
+// var dic = new Dictionary();
+// dic.set('key01', 'value01');
+// dic.set('key02', 'value02');
+// dic.set('key03', 'value03');
+// dic.set('key04', 'value04');
+
+// console.log(dic.getItems());
+
+// dic.delete('key02')
+
+// console.log(dic.getItems());
+
+
+// var obj = {
+//   'key04' : 'value04',
+//   'key05' : 'value05',
+//   'key06' : 'value06',
+// };
+
+
+
+// console.log(obj['key05']);
