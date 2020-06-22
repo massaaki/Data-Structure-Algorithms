@@ -139,7 +139,7 @@ hash.put('helloWorld3', 'helloworldValue3');
 console.log(hash.get('helloWorld'));
 hash.remove('helloWorld');
 console.log(hash.get('helloWorld'));
-
+ 
 
 
 // var dic = new Dictionary();
